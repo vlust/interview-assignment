@@ -47,3 +47,6 @@ __pycache__/
 
 *.lck
 **.zip
+
+# vscode 
+.vscode/
