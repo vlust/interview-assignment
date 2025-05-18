@@ -11,7 +11,7 @@ def main():
     p.add_argument(
         "--port",
         default="loop://",
-        help="Serial port URL (e.g. loop:// or /dev/pts/5)",
+        help="Serial port URL (e.g. loop:// or COM3 or /dev/pts/5)",
     )
     p.add_argument("--baud", type=int, default=9600)
     p.add_argument("--outfile", default="output.png", help="Where to save the plot")
@@ -22,16 +22,9 @@ def main():
     ser = serial.serial_for_url(args.port, baudrate=args.baud, timeout=1)
     # start emulator if requested (only works on loop://)
     if args.test and args.port.startswith("loop://"):
-        def _emulator(s, duration=60):
-            t0 = time.time()
-            while True:
-                t = time.time() - t0
-                if t >= duration:
-                    break
-                current = 12 + 8 * (random.random() - 0.5)
-                s.write(f"{current:.3f}\n".encode())
-                time.sleep(0.1)
-        threading.Thread(target=_emulator, args=(ser, args.duration), daemon=True).start()
+        # only import emulator when needed
+        from emulator import start_emulator
+        start_emulator(ser, args.duration)
     print(f"[plot_data] Listening on {args.port} for {args.duration} seconds...")
 
     start = time.time()
@@ -69,7 +62,7 @@ def main():
     plt.grid(True)
     plt.tight_layout()
     plt.savefig(args.outfile)
-    print(f"[plot_data] Saved plot to {args.outfile}")
+    print(f"[plot_data] Saved plot to {args.outfile}")
     # Optionally: plt.show()
 
 if __name__ == "__main__":
