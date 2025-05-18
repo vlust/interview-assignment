@@ -3,9 +3,11 @@ import argparse
 import datetime
 import subprocess
 import os
+from typing import Any, Dict
 
 
-def get_git_remote():
+def get_git_remote() -> str:
+    """Return git remote URL or empty string if not available."""
     try:
         return subprocess.check_output(
             ["git", "config", "--get", "remote.origin.url"], stderr=subprocess.DEVNULL
@@ -14,7 +16,8 @@ def get_git_remote():
         return ""
 
 
-def get_git_commit():
+def get_git_commit() -> str:
+    """Return current git commit hash or empty string if not available."""
     try:
         return subprocess.check_output(
             ["git", "rev-parse", "HEAD"], stderr=subprocess.DEVNULL
@@ -23,11 +26,29 @@ def get_git_commit():
         return ""
 
 
-def generate_report(cli_args, data, script_file, plot_path, out_tex='report.tex'):
+def generate_report(
+    cli_args: Dict[str, Any],
+    data: Dict[str, Any],
+    script_file: str,
+    plot_path: str,
+    out_tex: str = 'report.tex',
+) -> None:
+    """
+    Generate a LaTeX report from sensor data and compile to PDF.
+
+    Args:
+        cli_args: Command-line arguments dictionary.
+        data: Sensor data with keys 'timestamps' and 'values'.
+        script_file: Path to the data acquisition script.
+        plot_path: Path to the generated plot image.
+        out_tex: Output .tex filename for the report.
+    """
     # Collect metadata
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     # helper to escape LaTeX special chars
-    def latex_escape(s): return s.replace('_', '\\_')
+    def latex_escape(s: str) -> str:
+        """Escape underscores for LaTeX."""
+        return s.replace('_', '\\_')
     git_remote = get_git_remote()
     git_commit = get_git_commit()
     port = latex_escape(cli_args.get('port', ''))

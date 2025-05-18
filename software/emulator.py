@@ -2,13 +2,14 @@
 import time
 import random
 import threading
+from typing import Any
 
-def start_emulator(serial_obj, duration):
+def start_emulator(serial_obj: Any, duration: float) -> None:
     """
     Launches a background thread that writes synthetic sensor data to the given serial object
     for the specified duration in seconds.
     """
-    def _emulator(s, duration):
+    def _emulator(s: Any, duration: float) -> None:
         t0 = time.time()
         while True:
             t = time.time() - t0

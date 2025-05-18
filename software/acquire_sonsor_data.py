@@ -8,8 +8,13 @@ import matplotlib.pyplot as plt
 import os
 import datetime
 from report import generate_report
+from argparse import Namespace
+from typing import List, Any
 
-def main():
+def main() -> None:
+    """
+    Acquire serial sensor data for a given duration, plot the results, and generate a LaTeX report.
+    """
     p = argparse.ArgumentParser(description="Read serial data for a specified duration and plot it")
     p.add_argument(
         "--port",
@@ -24,14 +29,14 @@ def main():
     )
     p.add_argument("--test",    action="store_true", help="Run built-in emulator (loop:// only)")
     p.add_argument("--duration", type=float, default=60.0, help="Duration in seconds to record data")
-    args = p.parse_args()
+    args: Namespace = p.parse_args()
 
     # prepare output directory and filenames
     outdir = args.outdir
     os.makedirs(outdir, exist_ok=True)
     date_str = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
 
-    ser = serial.serial_for_url(args.port, baudrate=args.baud, timeout=1)
+    ser: Any = serial.serial_for_url(args.port, baudrate=args.baud, timeout=1)
     # start emulator if requested (only works on loop://)
     if args.test and args.port.startswith("loop://"):
         # only import emulator when needed
@@ -40,8 +45,8 @@ def main():
     print(f"[plot_data] Listening on {args.port} for {args.duration} seconds...")
 
     start = time.time()
-    timestamps = []
-    values = []
+    timestamps: List[float] = []
+    values: List[float] = []
 
     while True:
         line = ser.readline()  # expects newline‐terminated text, e.g. "12.34\n"
@@ -50,7 +55,7 @@ def main():
         if line:
             try:
                 # convert to float; strip newline
-                val = float(line.decode(errors="ignore").strip())
+                val: float = float(line.decode(errors="ignore").strip())
                 timestamps.append(now)
                 values.append(val)
                 print(f"[{now:5.2f}s]  {val}")
