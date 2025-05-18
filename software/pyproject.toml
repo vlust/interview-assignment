@@ -6,5 +6,5 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "matplotlib>=3.10.3",
-    "serial>=0.0.97",
+    "pyserial>=3.5",
 ]
