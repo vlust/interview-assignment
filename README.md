@@ -6,12 +6,87 @@ The hardest part of this project was making design decisions. With little to no 
 
 The 4–20 mA interface was not specified, so I assumed a sensor with an integrated transmitter and chose a 100 Ω shunt resistor, expecting a 0.4 V to 2 V voltage output (for different voltage ranges, the shunt resistor would need to be adjusted). If the sensor were just a passive component, a transmitter circuit would be required.
 
-I attempted to build the circuit using components I had available to make the process more engaging. The result is this schematic: [CurrentSensorUSB\_prototype.pdf](hardware/CurrentSensorUSB_prototype/CurrentSensorUSB_prototype.pdf). I didn’t have any components to achieve galvanic isolation between the MCU and the current measurement, but I was able to use the circuit to test the Python data acquisition software. I wrote the firmware in Rust because I had never tried embedded Rust before.
+I attempted to build the circuit using components I had available to make the process more interesting. The result is this schematic: [CurrentSensorUSB\_prototype.pdf](hardware/CurrentSensorUSB_prototype/CurrentSensorUSB_prototype.pdf). I didn’t have any components to achieve galvanic isolation between the MCU and the current measurement, but I was able to use the circuit to test the Python data acquisition software. I wrote the firmware in Rust because I had never tried embedded Rust before.
 
-The prototype circuit didn’t fully meet the requirements outlined in the task, so I created another schematic: [CurrentSensorUSB.pdf](hardware/CurrentSensorUSB/CurrentSensorUSB.pdf), along with a BOM: [CurrentSensorUSB.csv](hardware/CurrentSensorUSB/CurrentSensorUSB.csv). A more detailed explanation of the component choices can be found here: [README.md](hardware/CurrentSensorUSB_prototype/README.md).
+The prototype circuit didn’t fully meet the requirements outlined in the task, so I created another schematic: [CurrentSensorUSB.pdf](hardware/CurrentSensorUSB/CurrentSensorUSB.pdf), along with a BOM: [CurrentSensorUSB.csv](hardware/CurrentSensorUSB/CurrentSensorUSB.csv). A more detailed explanation of the component choices can be found here: [README.md](hardware/CurrentSensorUSB_prototype/README.md). I couldnt write the firmware for tis circuit, because I didnt have the hardware or toolchain to test it.
 
 ## Task 2
 
 The `software` folder contains a Python project with a CLI tool that can acquire a data stream over serial and generate a report based on the acquired data. An example report generated using the prototype board can be found here: [report.pdf](software/data/report_20250518_223138.pdf). More information on this task can be found in the README in the software directory: [README.md](software/README.md).
 
+## Task 3
+
+### 1. Procurement and Documentation
+
+* **Bill of Materials (BOM):**
+
+  * List each component’s reference designator, manufacturer part number, quantity, package, and tolerance. ([BOM](hardware/CurrentSensorUSB/CurrentSensorUSB.csv))
+
+* **Supplier Selection:**
+
+  * Order from authorized distributors (e.g., Digi‑Key, Mouser).
+  * Verify lead times (aim for < 8 weeks) and minimum reel‐quantities match production volume.
+* **Files for Suppliers:**
+
+  * **PCB Fabricator:** Gerber RS‑274X package (copper, mask, silkscreen, drill), board outline (DXF/PDF), impedance spec (USB lanes).
+  * **Assembly House:** BOM, pick‑and‑place (centroid) file, paste‑mask Gerbers, assembly drawing PDFs.
+
+---
+
+### 2. Manufacturing Steps
+
+1. **PCB Fabrication (DFM Review)**
+
+   * Ensure trace/space, via sizes, and 2.5 mm isolation clearance meet standards.
+   * Four‑layer stack‑up (2 signal, 2 power/ground) for stable analog and controlled‑impedance USB. Independent Iso layers, could be an option, though i didnt have time to finish the layout (wasnt required in the task description)
+2. **Assembly (PCBA)**
+
+* Provide a laser‑cut stencil for solder paste.
+    * Reflow profile matched to the most temperature‑sensitive IC.
+    * Post‑reflow AOI to catch solder defects. Since no QFN parts are used, X‑ray inspection is not be necessary.
+3. **Firmware Provisioning**
+
+   * Use a simple SWD/JTAG fixture and ST‑Link (or equivalent) to program each MCU with the final Rust firmware binary. Maybe a dev board should be build with a USB-bootloader and debugger for better firmware devolopment experience (current design has only SWD headers)
+
+---
+
+### 3. Testing and Calibration
+
+* **Incoming Inspection (IQC):**
+
+  * Sample critical parts (shunt resistor, op‑amp, isolator) to verify values and functionality.
+* **In‑Process Checks:**
+
+  * **Bare‑Board Test:** Flying‐probe or ICT to catch opens/shorts.
+  * **Power‑Up Smoke Test:** Limit current to \~100 mA, verify no excessive draw or heating.
+* **End‑of‑Line Functional Test (FCT):**
+
+  1. **USB Enumeration:** Ensure the board appears as a CDC/Serial device; verify VID/PID and basic loopback.
+  2. **Current‐Loop Accuracy:**
+
+     * Use a 4–20 mA precision source (≤ 0.01 % accuracy) to apply five setpoints (4, 8, 12, 16, 20 mA).
+     * Read back ADC counts via USB; compute offset and gain error.
+     * The python data acquisition tool can be adapted to create automatic reports (see [example_report.pdf](software/data/report_20250518_223138.pdf)).
+     * The MCU would need to be able to communicate the current firmware Version and serial number on startup for example, creating tht identification for the report.
+  3. **Calibration:**
+
+     * Adjust offset (at 4 mA) and gain (at 20 mA), by programming compensation coefficients into flash. (trimmer reistorss could also be added to the board for calibration)
+     * Verify mid‑point (e.g., 12 mA) to confirm linearity within tolerance.
+  4. **Isolation Test:**
+
+     * Perform a hipot test between USB side and sensor side to confirm isolation and leakage requirements.
+* **Traceability:**
+
+  * Assign each board a serial number; record calibration data (offset/gain) and test results in a simple CSV or database, with links to the reports.
+
+---
+
+### 4. Required Equipment & Files Summary
+
+| **Category**             | **Files/Supplies**                                           | **Equipment**                                                                                              |
+| ------------------------ | ------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------- |
+| **PCB Fab**              | Gerbers, drill file, board outline (DXF/PDF), impedance spec | —                                                                                                          |
+| **PCB Assembly**         | BOM (incl. alternates), pick‑and‑place, paste‑mask Gerbers   | Pick‑and‑place machine, reflow oven, AOI, X‑ray                                                            |
+| **Firmware/Programming** | Final Rust `.bin`/`.hex`, programming script, README         | SWD/JTAG programmer (ST‑Link), PC                                                                          |
+| **Functional Testing**   | Test‑fixture drawing, FCT script (Python), calibration doc   | 4–20 mA precision source (e.g., Keithley), 6½‑digit DMM, oscilloscope, USB protocol analyzer, hipot tester |
 
