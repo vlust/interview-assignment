@@ -59,14 +59,14 @@ fn main() -> ! {
         let whole: i16 = centi_milliamp / 100;                     // 12
         let fract: i16 = (centi_milliamp.abs() % 100) as i16;      // 34
 
-        ufmt::uwrite!(&mut serial, "I: ").unwrap();
-        ufmt::uwrite!(&mut serial, "{}", whole).unwrap();
-        ufmt::uwrite!(&mut serial, ".").unwrap();
+        // ufmt::uwrite!(&mut serial, "I: ").unwrap();
+        // ufmt::uwrite!(&mut serial, "{}", whole).unwrap();
+        // ufmt::uwrite!(&mut serial, ".").unwrap();
         if fract < 10 {
             ufmt::uwrite!(&mut serial, "0").unwrap();
         }
-        ufmt::uwrite!(&mut serial, "{}", fract).unwrap();
-        ufmt::uwrite!(&mut serial, " mA\r\n").unwrap();
+        // ufmt::uwrite!(&mut serial, "{}", fract).unwrap();
+        // ufmt::uwrite!(&mut serial, " mA\r\n").unwrap();
 
         // —————————————————————————————————————————————————————————————————————
         if current_ma < 4.0_f32 || current_ma > 20.0_f32 {
