@@ -59,7 +59,7 @@ def generate_report(
     plot_name = os.path.basename(plot_path)
 
     # Load LaTeX template and substitute placeholders
-    template_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'report_template.tex'))
+    template_path = 'report_template.tex'
     with open(template_path, 'r', encoding='utf-8') as f:
         template = f.read()
     subs = {
