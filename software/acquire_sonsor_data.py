@@ -5,6 +5,7 @@ import random
 import threading
 import serial
 import matplotlib.pyplot as plt
+from report import generate_report
 
 def main():
     p = argparse.ArgumentParser(description="Read serial data for a specified duration and plot it")
@@ -63,6 +64,8 @@ def main():
     plt.tight_layout()
     plt.savefig(args.outfile)
     print(f"[plot_data] Saved plot to {args.outfile}")
+    # Generate LaTeX report including metadata, raw data and plot
+    generate_report(vars(args), {'timestamps': timestamps, 'values': values}, __file__, args.outfile)
     # Optionally: plt.show()
 
 if __name__ == "__main__":
