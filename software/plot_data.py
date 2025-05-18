@@ -7,7 +7,7 @@ import serial
 import matplotlib.pyplot as plt
 
 def main():
-    p = argparse.ArgumentParser(description="Read 60 s of serial data and plot it")
+    p = argparse.ArgumentParser(description="Read serial data for a specified duration and plot it")
     p.add_argument(
         "--port",
         default="loop://",
@@ -16,6 +16,7 @@ def main():
     p.add_argument("--baud", type=int, default=9600)
     p.add_argument("--outfile", default="output.png", help="Where to save the plot")
     p.add_argument("--test",    action="store_true", help="Run built-in emulator (loop:// only)")
+    p.add_argument("--duration", type=float, default=60.0, help="Duration in seconds to record data")
     args = p.parse_args()
 
     ser = serial.serial_for_url(args.port, baudrate=args.baud, timeout=1)
@@ -30,8 +31,8 @@ def main():
                 current = 12 + 8 * (random.random() - 0.5)
                 s.write(f"{current:.3f}\n".encode())
                 time.sleep(0.1)
-        threading.Thread(target=_emulator, args=(ser,60), daemon=True).start()
-    print(f"[plot_data] Listening on {args.port} for 60 seconds...")
+        threading.Thread(target=_emulator, args=(ser, args.duration), daemon=True).start()
+    print(f"[plot_data] Listening on {args.port} for {args.duration} seconds...")
 
     start = time.time()
     timestamps = []
@@ -52,8 +53,8 @@ def main():
                 # skip parse errors
                 pass
 
-        # Stop after exactly 60 seconds
-        if now >= 10.0:
+        # Stop after exactly args.duration seconds
+        if now >= args.duration:
             break
 
     ser.close()
@@ -64,7 +65,7 @@ def main():
     plt.plot(timestamps, values, marker="o", linestyle="-")
     plt.xlabel("Time (s)")
     plt.ylabel("Sensor Value (e.g. mA→scaled)")
-    plt.title("60 s Snippet")
+    plt.title(f"{int(args.duration)} s Snippet")
     plt.grid(True)
     plt.tight_layout()
     plt.savefig(args.outfile)
