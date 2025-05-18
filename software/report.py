@@ -3,6 +3,7 @@ import argparse
 import datetime
 import subprocess
 import os
+import shutil
 from typing import Any, Dict
 
 
@@ -82,6 +83,12 @@ def generate_report(
     
     tex_dir, tex_file = os.path.split(out_tex)
     cmd = ['pdflatex', '-interaction=nonstopmode', tex_file]
+    # Check if pdflatex is installed
+    if shutil.which('pdflatex') is None:
+        print("Error: 'pdflatex' is not installed. Please install it to generate the PDF.")
+        return
+
     subprocess.run(cmd, cwd=tex_dir or '.', check=True)
+    
     pdf_file = os.path.splitext(out_tex)[0] + '.pdf'
     print(f"PDF generated at {pdf_file}")

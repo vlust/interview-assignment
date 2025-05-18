@@ -16,7 +16,7 @@
 
 1. Clone the repository:
    ```bash
-   git clone <repo-url> && cd interview-assignment/software
+   git clone https://github.com/vlust/interview-assignment.git && cd interview-assignment/software
    ```
 
 ## Usage
@@ -37,7 +37,7 @@ uv run acquire_sonsor_data.py \
 uv run acquire_sonsor_data.py --port loop:// --test --duration 10 --outdir ./results
 ```
 - Creates `results/data_YYYYMMDD_HHMMSS.csv` containing timestamp/value columns.
-- Generates `results/plot_YYYYMMDD_HHMMSS.png` (or .pdf).
+- Generates `results/plot_YYYYMMDD_HHMMSS.png`
 - Writes `results/report_YYYYMMDD_HHMMSS.tex` and compiles to PDF using the LaTeX template in the project root.
 
 
