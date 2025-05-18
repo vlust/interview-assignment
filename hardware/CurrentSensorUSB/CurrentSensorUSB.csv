@@ -1,21 +1,21 @@
-"Reference","Qty","Value","DNP","Exclude from BOM","Exclude from Board","Footprint","Datasheet"
-"C1,C2","2","1 μF Ceramic","","","","Capacitor_SMD:C_0603_1608Metric","~"
-"C3","1","0.1 μF","","","","Capacitor_SMD:C_0603_1608Metric","~"
-"C4","1","C","","","","Capacitor_SMD:C_0603_1608Metric","~"
-"C5,C6","2","6.8pF","","","","Capacitor_SMD:C_0603_1608Metric","~"
-"C7","1","1 μF","","","","Capacitor_SMD:C_0603_1608Metric","~"
-"D1","1","PRTR5V0U2X","","","","Package_TO_SOT_SMD:SOT-143","https://assets.nexperia.com/documents/data-sheet/PRTR5V0U2X.pdf"
-"J1","1","TC2030","","Excluded from BOM","","Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical","https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/2019/12/TC2030-IDC-NL-Datasheet-Rev-B.pdf"
-"J2","1","Screw_Terminal_01x02","","","","TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal","~"
-"P1","1","USB_C_Plug_USB2.0","","","","Connector_USB:USB_C_Plug_Molex_105444","https://www.usb.org/sites/default/files/documents/usb_type-c.zip"
-"PS1","1","MEE1S0503SC","","","","Converter_DCDC:Converter_DCDC_Murata_MEE1SxxxxSC_THT","https://power.murata.com/pub/data/power/ncl/kdc_mee1.pdf"
-"R1","1","5.1K","","","","Resistor_SMD:R_0603_1608Metric","~"
-"R2","1","R_Shunt 100","","","","Resistor_SMD:R_Shunt_Ohmite_LVK12","~"
-"R3,R4,R5,R6","4","4.7 kΩ","","","","Resistor_SMD:R_0603_1608Metric","~"
-"R7","1","R_F 1 kΩ","","","","Resistor_SMD:R_0603_1608Metric","~"
-"SW1","1","SW_Push","","","","Button_Switch_SMD:SW_MEC_5GSH9","~"
-"U1","1","ATSAMD21E18A-A","","","","Package_QFP:TQFP-32_7x7mm_P0.8mm","http://ww1.microchip.com/downloads/en/DeviceDoc/SAM_D21_DA1_Family_Data%20Sheet_DS40001882E.pdf"
-"U2","1","MCP1703Ax-330xxDB","","","","Package_TO_SOT_SMD:SOT-223-3_TabPin2","http://ww1.microchip.com/downloads/en/DeviceDoc/20005122B.pdf"
-"U3","1","ADS1113IDGS","","","","Package_SO:TSSOP-10_3x3mm_P0.5mm","http://www.ti.com/lit/ds/symlink/ads1113.pdf"
-"U5","1","ADuM1250","","","","Package_SO:SOIC-8_3.9x4.9mm_P1.27mm","https://www.analog.com/media/en/technical-documentation/data-sheets/ADuM1250_1251.pdf"
-"Y1","1","32.768kHz, 7pF","","","","Crystal:Crystal_SMD_0603-4Pin_6.0x3.5mm","~"
+Reference,Qty,Value,DNP,Exclude from BOM,Exclude from Board,Footprint,Datasheet/Partnumber
+"C1,C2",2,1 μF Ceramic,,,,Capacitor_SMD:C_0603_1608Metric,~
+C3,1,0.1 μF,,,,Capacitor_SMD:C_0603_1608Metric,~
+C4,1,C,,,,Capacitor_SMD:C_0603_1608Metric,~
+"C5,C6",2,6.8pF,,,,Capacitor_SMD:C_0603_1608Metric,~
+C7,1,1 μF,,,,Capacitor_SMD:C_0603_1608Metric,~
+D1,1,PRTR5V0U2X,,,,Package_TO_SOT_SMD:SOT-143,https://assets.nexperia.com/documents/data-sheet/PRTR5V0U2X.pdf
+J1,1,TC2030,,Excluded from BOM,,Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical,https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/2019/12/TC2030-IDC-NL-Datasheet-Rev-B.pdf
+J2,1,Screw_Terminal_01x02,,,,"TerminalBlock_Phoenix:TerminalBlock_Phoenix_MKDS-1,5-2_1x02_P5.00mm_Horizontal",~
+P1,1,USB_C_Plug_USB2.0,,,,Connector_USB:USB_C_Plug_Molex_105444,https://www.usb.org/sites/default/files/documents/usb_type-c.zip
+PS1,1,MEE1S0503SC,,,,Converter_DCDC:Converter_DCDC_Murata_MEE1SxxxxSC_THT,https://power.murata.com/pub/data/power/ncl/kdc_mee1.pdf
+R1,1,5.1K,,,,Resistor_SMD:R_0603_1608Metric,~
+R2,1,R_Shunt 100,,,,Resistor_SMD:R_Shunt_Ohmite_LVK12,LVK12R100FER
+"R3,R4,R5,R6",4,4.7 kΩ,,,,Resistor_SMD:R_0603_1608Metric,~
+R7,1,R_F 1 kΩ,,,,Resistor_SMD:R_0603_1608Metric,~
+SW1,1,SW_Push,,,,Button_Switch_SMD:SW_MEC_5GSH9,5GSH935
+U1,1,ATSAMD21E18A-A,,,,Package_QFP:TQFP-32_7x7mm_P0.8mm,http://ww1.microchip.com/downloads/en/DeviceDoc/SAM_D21_DA1_Family_Data%20Sheet_DS40001882E.pdf
+U2,1,MCP1703Ax-330xxDB,,,,Package_TO_SOT_SMD:SOT-223-3_TabPin2,http://ww1.microchip.com/downloads/en/DeviceDoc/20005122B.pdf
+U3,1,ADS1113IDGS,,,,Package_SO:TSSOP-10_3x3mm_P0.5mm,http://www.ti.com/lit/ds/symlink/ads1113.pdf
+U5,1,ADuM1250,,,,Package_SO:SOIC-8_3.9x4.9mm_P1.27mm,https://www.analog.com/media/en/technical-documentation/data-sheets/ADuM1250_1251.pdf
+Y1,1,"32.768kHz, 7pF",,,,Crystal:Crystal_SMD_0603-4Pin_6.0x3.5mm,ECS-.327-7-34Q-TR 
