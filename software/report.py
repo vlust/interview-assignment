@@ -43,7 +43,6 @@ def generate_report(
         plot_path: Path to the generated plot image.
         out_tex: Output .tex filename for the report.
     """
-    # Collect metadata
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     # helper to escape LaTeX special chars
     def latex_escape(s: str) -> str:
@@ -75,11 +74,12 @@ def generate_report(
     }
     for key, val in subs.items():
         template = template.replace(f'{{{key}}}', str(val))
-    # Write .tex file
+
     with open(out_tex, 'w', encoding='utf-8') as f:
         f.write(template)
     print(f"Report written to {out_tex}")
-    # Compile LaTeX to PDF
+
+    
     tex_dir, tex_file = os.path.split(out_tex)
     cmd = ['pdflatex', '-interaction=nonstopmode', tex_file]
     subprocess.run(cmd, cwd=tex_dir or '.', check=True)
