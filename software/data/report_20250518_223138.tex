@@ -1,0 +1,92 @@
+\documentclass[11pt]{article}
+%------------------------
+% Packages and Formatting
+%------------------------
+\usepackage[margin=0.7in]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{parskip}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage[hidelinks]{hyperref}
+\usepackage{siunitx}
+\usepackage{caption}
+
+%------------------------
+% Compact Section Spacing
+%------------------------
+\titlespacing*{\section}{0pt}{*0.5}{*0.5}
+\titlespacing*{\subsection}{0pt}{*0.3}{*0.3}
+\setlength{\parskip}{0.4em}
+\setlength{\parindent}{0pt}
+
+%------------------------
+% Header/Footer
+%------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\small\textbf{Data Acquisition Report}}
+\rhead{\small 2025-05-18 22:32:38}
+\cfoot{\small\thepage}
+
+%------------------------
+% Title Setup
+%------------------------
+\title{\vspace{-2em}\LARGE\bfseries Data Acquisition Report}
+\author{\small Department / Institution}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+\vspace{-1em}
+\begin{tcolorbox}[colback=gray!15,colframe=gray!60,arc=2pt,boxrule=0.5pt, left=3pt,right=3pt,top=3pt,bottom=3pt]
+  {\small
+  \begin{tabular}{@{}p{1.6in}p{3.4in}@{}}
+    \toprule
+    \textbf{Script:}      & \texttt{acquire\_sonsor\_data.py} \\
+    \textbf{Port:}        & \texttt{COM3} \\
+    \textbf{Baud rate:}   & \SI{9600}{\bit\per\second} \\
+    \textbf{Test mode:}   & False \\
+    \textbf{Duration:}    & \SI{60.0}{s} \\
+    \textbf{Git remote:}  & \texttt{https://github.com/vlust/interview-assignment.git} \\
+    \textbf{Git commit:}  & \texttt{58ec9bef8209fa7d6595115be404b474721c9a91} \\
+    \textbf{Timestamp:}   & 2025-05-18 22:32:38 \\
+    \bottomrule
+  \end{tabular}
+  }
+\end{tcolorbox}
+
+%------------------------
+% Introduction
+%------------------------
+\section*{1. Introduction}
+\small
+A loopback test was performed to validate the data-acquisition script and communication pipeline. By sending a known ramp signal over a virtual serial interface, we verify integrity before deploying to actual hardware.
+
+%------------------------
+% Methods
+%------------------------
+\section*{2. Methods}
+\begin{itemize}
+  \setlength\itemsep{0.2em}
+  \item \textbf{Interface:} Virtual serial port (\texttt{loop://}) at \SI{9600}{\bit\per\second}.
+  \item \textbf{Duration:} \SI{3}{s}
+  \item \textbf{Logging:} Timestamped \texttt{<timestamp, value>} entries to CSV; buffered I/O to minimize latency.
+\end{itemize}
+
+%------------------------
+% Results
+%------------------------
+\section*{3. Results}
+\begin{center}
+  \includegraphics[width=0.6\linewidth]{{plot_20250518_223138.png}}
+  \vspace{0.5em}
+  \captionof{figure}{Acquired ramp signal over \SI{60.0}{s} via loopback.}
+\end{center}
+
+\end{document}
