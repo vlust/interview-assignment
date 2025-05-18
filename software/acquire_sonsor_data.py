@@ -6,9 +6,10 @@ import os
 import datetime
 from argparse import Namespace
 from pathlib import Path
-from data_acquirer import acquire_data
-from plotter import plot_data
-from report import generate_report
+
+from lib.data_acquirer import acquire_data
+from lib.plotter import plot_data
+from lib.report import generate_report
 
 
 def main() -> None:
@@ -38,7 +39,7 @@ def main() -> None:
     ser = serial.serial_for_url(args.port, baudrate=args.baud, timeout=1)
     # start emulator if requested (only works on loop://)
     if args.test and args.port.startswith("loop://"):
-        from emulator import start_emulator
+        from lib.emulator import start_emulator
         start_emulator(ser, args.duration)
     print(f"[cli] Listening on {args.port} for {args.duration} seconds...")
 
