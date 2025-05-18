@@ -16,7 +16,6 @@
 # Output files
 *.net
 *.xml
-*.csv
 *.pos
 *.rpt
 *.drl
