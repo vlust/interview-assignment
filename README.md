@@ -11,7 +11,7 @@ The prototype circuit didn't meet the requirements outlined in the task, so I cr
 
 ## Task 2
 
-The software folder contains a python project with a cli tool which is able to acquire a stream of data over serial and creating a report based on the acquired data. More information on this task is in the readme in the software directory: [README.md](software\README.md)
+The software folder contains a python project with a cli tool which is able to acquire a stream of data over serial and creating a report based on the acquired data. An example report i genereated with the prototype board can be found here: [report.pdf](software\data\report_20250518_223138.pdf). More information on this task is in the readme in the software directory: [README.md](software\README.md)
 
 ## Task 3
 
