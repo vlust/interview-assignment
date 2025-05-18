@@ -5,7 +5,9 @@
 	(uuid "8dcf5709-dc7d-403d-98c2-2bb057422313")
 	(paper "A4")
 	(title_block
+		(title "USB Current Sensor")
 		(date "2025-05-18")
+		(rev "1.0")
 	)
 	(lib_symbols
 		(symbol "Analog_ADC:ADS1113IDGS"
