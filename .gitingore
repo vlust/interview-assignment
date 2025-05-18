@@ -1,0 +1,45 @@
+# KiCad project files to ignore
+
+# Backup and autosave files
+*.bak
+*.kicad_pcb-bak
+*.sch-bak
+*.kicad_sch-bak
+*.kicad_pro-bak
+*.kicad_prl-bak
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Output files
+*.net
+*.xml
+*.csv
+*.pos
+*.rpt
+*.drl
+*.gbr
+*.gtl
+*.gbl
+*.gts
+*.gbs
+*.gto
+*.gbo
+*.gm1
+*.gko
+*.map
+*.wrl
+*.step
+*.stp
+*.zip
+
+# Simulation files
+*.raw
+*.log
+*.cir
+
+# Other
+__pycache__/
+*.pyc
