@@ -34,7 +34,7 @@ uv run acquire_sonsor_data.py \
 
 ### Example
 ```bash
-uv run acquire_sonsor_data.py --port loop:// --test --duration 10 --outdir ./results
+uv run acquire_sonsor_data.py --test --duration 10 --outdir ./results
 ```
 - Creates `results/data_YYYYMMDD_HHMMSS.csv` containing timestamp/value columns.
 - Generates `results/plot_YYYYMMDD_HHMMSS.png`
