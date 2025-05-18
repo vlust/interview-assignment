@@ -8,7 +8,7 @@ The 4–20 mA interface was not specified, so I assumed a sensor with an integ
 
 I attempted to build the circuit using components I had available to make the process more interesting. The result is this schematic: [CurrentSensorUSB\_prototype.pdf](hardware/CurrentSensorUSB_prototype/CurrentSensorUSB_prototype.pdf). I didn’t have any components to achieve galvanic isolation between the MCU and the current measurement, but I was able to use the circuit to test the Python data acquisition software. I wrote the firmware in Rust because I had never tried embedded Rust before.
 
-The prototype circuit didn’t fully meet the requirements outlined in the task, so I created another schematic: [CurrentSensorUSB.pdf](hardware/CurrentSensorUSB/CurrentSensorUSB.pdf), along with a BOM: [CurrentSensorUSB.csv](hardware/CurrentSensorUSB/CurrentSensorUSB.csv). A more detailed explanation of the component choices can be found here: [README.md](hardware/CurrentSensorUSB_prototype/README.md). I couldn’t write the firmware for this circuit because I didn’t have the hardware or toolchain to test it.
+The prototype circuit didn’t fully meet the requirements outlined in the task, so I created another schematic: [CurrentSensorUSB.pdf](hardware/CurrentSensorUSB/CurrentSensorUSB.pdf), along with a BOM: [CurrentSensorUSB.csv](hardware/CurrentSensorUSB/CurrentSensorUSB.csv). A more detailed explanation of the component choices can be found here: [README.md](hardware/CurrentSensorUSB/README.md). I couldn’t write the firmware for this circuit because I didn’t have the hardware or toolchain to test it.
 
 ## Task 2
 
