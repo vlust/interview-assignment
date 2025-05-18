@@ -9,7 +9,6 @@
 - Generate a PDF report via LaTeX template (requires a LaTeX installation).
 
 ## Prerequisites
-- Python >= 3.13
 - [uv](https://docs.astral.sh/uv/getting-started/installation)
 - A LaTeX distribution (e.g. TeX Live, MiKTeX) on your PATH to compile reports
 
