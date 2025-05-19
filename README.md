@@ -1,4 +1,4 @@
-# Interview Task
+# Interview Assignment
 
 The hardest part of this project was making design decisions. With little to no design, monetary, or other constraints, I decided to base my choices on how interesting I found the solutions—particularly when there was no clear direction provided in the task.
 
